@@ -47,7 +47,7 @@ module.exports.each = each;
  * @param {*} value (operand): An expression representing the object or primitive whose type is to be returned. 
  * 
  */
-const typeOf = function(value){
+function typeOf(value){
 if(Array.isArray(value)) {
     return "array"; 
 } else if (value === null) {
@@ -65,7 +65,7 @@ module.exports.each = typeOf;
  * @param {array} array: An expression representing the object or primitive whose type is to be returned. 
  * @param {number} number: Passing number will return the first number elements of the array.
  */
-const first = function(array,number) {
+function first(array,number) {
     let arr = [];
     if (!Array.isArray(array)) {
         return [];
@@ -85,7 +85,7 @@ module.exports.each = first;
  * @param {array} array: An expression representing the object or primitive whose type is to be returned. 
  * @param {number} number: Passing number will return the last number elements of the array.
  */
-const last = (array, number) => {
+function last(array, number) {
     if(!Array.isArray(array) || number < 0) {
         return []; 
     }else if (typeof number !== "number"){
@@ -106,7 +106,7 @@ module.exports.each = last;
  * @param {array} array: Array to be searched.
  * @param {*} value: Value that you want to locate in array
  */
-const indexOf = (array, value) => {
+function indexOf(array, value){
      for (let i = 0; i < array.length; i++) {
         if (array[i] === value) {
             return i;
@@ -123,8 +123,9 @@ module.exports.each = indexOf;
  * @param {array} array: Array to be searched.
  * @param {*} value: Value that you want to locate in array
  */
-const contains = (array, value) => array.includes(value) ? true : false; 
-
+function contains(array, value){ 
+    array.includes(value) ? true : false; 
+}
 module.exports.each = contains; 
 
 
@@ -145,7 +146,7 @@ module.exports.unique = unique;
  * @param {array} array: The array filter is to be called apon. 
  * @param {func} function: function to be called on each element in the array. 
  */
-const filter = (array, func) => {
+function filter(array, func) {
     const arr = []; // empty array
     // loop though array
     for (let i = 0; i < array.length; i++) {
@@ -166,7 +167,7 @@ module.exports.unique = filter;
  * @param {array} array: The array filter is to be called apon. 
  * @param {func} function: function to be called on each element in the array. 
  */
-const reject = (a, func) => {
+function reject(a, func) {
 const newArr = []; 
 each(a, function(elem, index, a){
     let result = func(elem, index, a);
@@ -186,7 +187,7 @@ module.exports.unique = reject;
  * @param {array} array: The array filter is to be called apon. 
  * @param {func} function: function to be called on each element in the array. 
  */
-const partition = (array, func) => {
+function partition(array, func) {
     let newArr =[[], []];
     filter(array, function(e, k, a){
         let result = func(e, k, a);
@@ -207,7 +208,7 @@ module.exports.unique = partition;
  * @param {array or object} collection: The collection that contais the elements that the function is to be called apon. 
  * @param {func} function: function to be called on each element in the array. 
  */
-const map = (collection, func) => {
+function map(collection, func) {
     let resultArr = []; 
     each(collection, function(e, i, a){
         resultArr.push(func(e, i, a));
@@ -224,7 +225,7 @@ module.exports.unique = map;
  * @param {array or object} collection: The collection that contains the properties you would like to access
  * @param property: property that you want to access the values of. 
  */
-const pluck = (array, prop) => {
+function pluck(array, prop) {
     let newArr = [];
     map(array, function(e, i, a){
         newArr.push(array[i][prop]);
@@ -240,7 +241,7 @@ module.exports.unique = pluck;
  * @param {array or object} collection: The collection that contains the elements that the truthy falsy function will be called on
  * @param {function}: function: function to be called on each element in the array. 
  */
-const every = (collect, func) => {
+function every(collect, func) {
     let result = true; 
     each(collect, function(e, i, c){
         if(typeof func === "function"){
@@ -266,7 +267,7 @@ module.exports.unique = every;
  * @param {array or object} collection: The collection that contains the elements that the truthy falsy function will be called on
  * @param {function}: function: function to be called on each element in the array. 
  */
-const some = (collection, func) => {
+function some(collection, func) {
     let result = false;
     each(collection, function(e, i, c){
         if(typeof func === 'function'){
@@ -291,7 +292,7 @@ module.exports.unique = some;
  * @param {seed} number: A value to use as the first argument to the first call of the callback. If no initialValue is supplied, the
  * first element in the array will be used as the initial accumulator value and skipped as currentValue
  */
-const reduce = (array, func, seed) => {
+function reduce(array, func, seed){
   let previousResult;
   if(seed !== undefined){
     previousResult = seed;
